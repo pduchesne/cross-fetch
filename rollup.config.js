@@ -48,6 +48,7 @@ export default [
         // Choose between native implementation (global) or custom implementation (__self__)
         // var ctx = global.fetch ? global : __self__;
         var ctx = __self__; // this line disable service worker support temporarily
+        if (global.fetch) ctx.fetch = global.fetch.bind(global);
 
         exports = ctx.fetch // To enable: import fetch from 'cross-fetch'
         exports.default = ctx.fetch // For TypeScript consumers without esModuleInterop.
